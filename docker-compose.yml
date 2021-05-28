@@ -1,0 +1,16 @@
+version: "3.9"
+services: 
+  # Apache httpd
+  proxy: 
+    build: ./proxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./proxy/logs:/var/log/apache2
+      - ./proxy/public-html:/usr/local/apache2/htdocs/
+  
+  # Just a simple Python app that responds to HTTP
+  webapp:
+    build: ./webapp
+    ports:
+      - "5000:5000"
